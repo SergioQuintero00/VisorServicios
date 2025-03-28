@@ -1,0 +1,44 @@
+-- Crear la base de datos (opcional, se hace fuera si ya la tenés)
+CREATE DATABASE taller;
+
+-- Usar la base de datos
+-- \c taller
+
+-- Tabla de Clientes
+CREATE TABLE IF NOT EXISTS Cliente (
+    id SERIAL PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    contraseña VARCHAR(200) NOT NULL,
+    dni VARCHAR(20) NOT NULL UNIQUE,
+    telefono VARCHAR(20)
+);
+
+-- Tabla de Servicios
+CREATE TABLE IF NOT EXISTS Servicio (
+    id SERIAL PRIMARY KEY,
+    idCliente INT NOT NULL,
+    asunto VARCHAR(100) NOT NULL,
+    estado VARCHAR(50) NOT NULL,
+    FOREIGN KEY (idCliente) REFERENCES Cliente(id) ON DELETE CASCADE
+);
+
+-- Tabla de Detalles del Servicio
+CREATE TABLE IF NOT EXISTS ServicioDetalle (
+    id SERIAL PRIMARY KEY,
+    idServicio INT NOT NULL,
+    detalle TEXT NOT NULL,
+    FOREIGN KEY (idServicio) REFERENCES Servicio(id) ON DELETE CASCADE
+);
+
+-- Datos de ejemplo
+INSERT INTO Cliente (nombre, dni, telefono) VALUES
+('Juan Pérez', '12345678A', '600123456'),
+('Ana Gómez', '87654321B', '611654321');
+
+INSERT INTO Servicio (idCliente, asunto, estado) VALUES
+(1, 'Cambio de aceite', 'En proceso'),
+(2, 'Revisión de frenos', 'Completado');
+
+INSERT INTO ServicioDetalle (idServicio, detalle) VALUES
+(1, 'Se cambió el filtro y el aceite de motor.'),
+(2, 'Se revisaron y ajustaron los frenos delanteros y traseros.');
