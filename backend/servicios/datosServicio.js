@@ -39,14 +39,16 @@ function getHistorialServicio(idServicio) {
 function setDatosServicio(datos) {
   const idServicio = datos.id;
   const idCliente = datos.idCliente;
-  const asunto = datos.asunto;
-  const estado = datos.estado;
+  const asunto = datos.servicio;
   const detalles = datos.detalles;
-  const ObservacionTec = datos.ObservacionTec;
-  const Fecha_Entrada = datos.Fecha_Entrada;
-  const Fecha_Salida = datos.Fecha_Salida;
-  const Fecha_Creacion = datos.Fecha_Creacion;
-  const TipoServicio = datos.TipoServicio;
+  const memoTecnico = datos.memoTecnico;
+  const Fecha_Entrada = datos.fecha_Entrada;
+  const Fecha_Salida = datos.fecha_Salida;
+  const Fecha_Creacion = datos.fecha_Creacion;
+  const estado = datos.Estado;
+  const contactar = datos.contactar; //true o false
+  const prioridad = datos.prioridad; //del 1 al 5, 5 más importante
+  const tipoServicio = datos.TipoServicio;
   const cliente_nombre = datos.cliente_nombre;
   const cliente_dni = datos.cliente_dni;
   const cliente_telefono = datos.cliente_telefono;
@@ -55,16 +57,11 @@ function setDatosServicio(datos) {
   document.getElementById("fechaEntrada").innerHTML = Fecha_Entrada;
   document.getElementById("fechaSalida").innerHTML = Fecha_Salida;
   document.getElementById("estado").innerHTML = estado;
-  document.getElementById("tipoServicio").innerHTML = TipoServicio;
-  document.getElementById("observaciones").innerHTML = ObservacionTec;
+  document.getElementById("tipoServicio").innerHTML = tipoServicio;
+  document.getElementById("observaciones").innerHTML = memoTecnico;
   document.getElementById("idServicio").innerHTML = idServicio;
 
 }
-
-
-
-
-
 
 
 //Este método inserta los datos en el html o inserta html en la página sobre el historial del servicio
@@ -75,9 +72,9 @@ function setDatosHistorial(historial) {
   historial.forEach(item => {
     // Extrae los datos del historial
     const idHistorial = item.id;
-    const idServicio = item.IDServicio;
-    const detalle = item.Detalle;
-    const fechayhora = item.Fechayhora;
+    const idServicio = item.idServicio;
+    const detalle = item.detalle;
+    const fechayhora = item.fechayhora;
 
     // Crea un bloque HTML para cada evento del historial
     html += `

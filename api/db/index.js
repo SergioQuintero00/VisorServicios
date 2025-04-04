@@ -36,4 +36,24 @@ const pool = new Pool({
 //     console.error('Error al conectar con la base de datos:', err);
 //   });
 
+
+
+
+// const bcrypt = require('bcrypt');
+// // Contraseña original
+// const password = 'sergio';
+
+// // Número de rondas de sal (entre más alto, más seguro pero más lento)
+// const saltRounds = 10;
+
+// // Hasheando la contraseña
+// bcrypt.hash(password, saltRounds, (err, hash) => {
+//   if (err) {
+//     console.error('Error al hashear la contraseña:', err);
+//   } else {
+//     console.log('Contraseña original:', password);
+//     console.log('Hash generado:', hash);
+//   }
+// });
+
 module.exports = pool;

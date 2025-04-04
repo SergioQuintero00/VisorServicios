@@ -9,11 +9,13 @@ router.get('/servicios/usuario/:usuarioId', async (req, res) => {
   const { usuarioId } = req.params;
   try {
     const result = await pool.query(`
-      SELECT s.id, s.idCliente, s.asunto, s.estado, s.detalles, s."ObservacionTec", s."Fecha_Entrada", 
-      s."Fecha_Salida", s."Fecha_Creacion", s."TipoServicio"
-      FROM Servicio s
+      SELECT s.id, s.idCliente, s.servicio, s.detalles, s."memoTecnico", s."fecha_Entrada", s."fecha_Salida", 
+      s."fecha_Creacion", e."Estado", s.contactar, s.prioridad, t."TipoServicio"
+      FROM "Servicio" s
+      JOIN "EstadoServicio" e ON s."idEstado" = e.id
+      JOIN "TipoServicio" t ON s."idTipoServicio" = t.id
       WHERE s.idCliente = $1
-      ORDER BY s."Fecha_Entrada" DESC
+      ORDER BY s."fecha_Entrada" DESC
     `, [usuarioId]);
 
     res.json(result.rows);
@@ -29,11 +31,15 @@ router.get('/historial/:servicioId', async (req, res) => {
   const { servicioId } = req.params;
   try {
     const result = await pool.query(`
-      SELECT h.id, h."IDServicio", h."Detalle", h."Fechayhora"
+      SELECT h.id, h."idServicio", h.detalle, h.fechayhora
       FROM "Serv_Historial" h
-      WHERE h."IDServicio" = $1
-      ORDER BY h."Fechayhora" ASC
+      WHERE h."idServicio" = $1
+      ORDER BY h.fechayhora ASC
     `, [servicioId]);
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({ error: 'Servicio no encontrado' });
+    }
 
     res.json(result.rows);
   } catch (err) {
@@ -48,11 +54,13 @@ router.get('/servicio/:id', async (req, res) => {
   const { id } = req.params;
   try {
     const result = await pool.query(`
-      SELECT s.id, s.idCliente, s.asunto, s.estado, s.detalles, s."ObservacionTec", s."Fecha_Entrada", 
-      s."Fecha_Salida", s."Fecha_Creacion", s."TipoServicio", c.nombre AS cliente_nombre, c.dni AS cliente_dni,
-      c.telefono AS cliente_telefono
-      FROM servicio s
-      JOIN Cliente c ON s.idCliente = c.id
+      SELECT s.id, s.idCliente, s.servicio, s.detalles, s."memoTecnico", s."fecha_Entrada", s."fecha_Salida", 
+      s."fecha_Creacion", e."Estado", s.contactar, s.prioridad, t."TipoServicio", en.nombre AS cliente_nombre, en.dni AS cliente_dni,
+      en.telefono AS cliente_telefono
+      FROM "Servicio" s
+      JOIN "EstadoServicio" e ON s."idEstado" = e.id
+      JOIN "TipoServicio" t ON s."idTipoServicio" = t.id
+      JOIN "Entidad" en ON s.idCliente = en.id
       WHERE s.id = $1
     `, [id]);
 
@@ -74,7 +82,7 @@ router.post('/login', async (req, res) => {
   try {
     const result = await pool.query(`
       SELECT id, nombre, contraseña, dni, telefono 
-      FROM Cliente 
+      FROM "Entidad" 
       WHERE dni = $1
     `, [dni]);
 
