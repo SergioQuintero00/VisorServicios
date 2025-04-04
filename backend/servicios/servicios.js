@@ -46,8 +46,16 @@ function setServicios(servicios) {
   if (servicios != null) {
     servicios.forEach(servicio => {
       const idServicio = servicio.id;
-      const asunto = servicio.asunto;
-      const estado = servicio.estado;
+      const asunto = servicio.servicio;
+      const detalles = servicio.detalles;
+      const memoTecnico = servicio.memoTecnico;
+      const fecha_Entrada = servicio.fecha_Entrada;
+      const fecha_Salida = servicio.fecha_Salida;
+      const fecha_Creacion = servicio.fecha_Creacion;
+      const estado = servicio.Estado;
+      const contactar = servicio.contactar; //true o false
+      const prioridad = servicio.prioridad; //Del 1 al 5, siendo 5 el más importante
+      const tipoServicio = servicio.TipoServicio
       // Asumimos que 'detalles' es un array y lo unimos en una cadena HTML
       const detalle = Array.isArray(servicio.detalles)
         ? servicio.detalles.map(d => d.detalle).join("<br>")
