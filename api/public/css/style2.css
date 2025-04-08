@@ -1,0 +1,95 @@
+/* Nuevo estilo para menu.html basado en el estilo final de servicio.html */
+
+/* Fondo, fuente y colores generales */
+body {
+    background-color: #eef2f7;
+    /* Fondo grisáceo azulado */
+    font-family: 'Roboto', sans-serif;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+/* Navbar profesional */
+nav.navbar {
+    background-color: #2c3e50 !important;
+}
+
+nav.navbar .navbar-brand,
+nav.navbar .navbar-text {
+    color: #ecf0f1 !important;
+}
+
+/* Título principal */
+h2 {
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+/* Filtro de estado */
+label.form-label {
+    font-weight: 500;
+}
+
+/* Accordion: cada servicio */
+.accordion-item {
+    border: none;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Botón del accordion */
+.accordion-button {
+    background-color: #cfcfcf;
+    color: #000000;
+    font-weight: bold;
+    padding: 15px;
+    border: none;
+    border-radius: 0;
+    transition: background-color 0.3s ease;
+}
+
+.accordion-button:not(.collapsed) {
+    background-color: #002244;
+    color: #fff;
+}
+
+.accordion-button:focus {
+    box-shadow: none;
+}
+
+/* Cuerpo del accordion, manteniendo el fondo blanco para los servicios */
+.accordion-body {
+    background-color: #fff;
+    padding: 20px;
+    color: #333;
+    position: relative;
+}
+
+/* Botón "Ver detalles" con mayor espacio para evitar solapamientos */
+.accordion-body .btn {
+    border-radius: 50px;
+    padding: 10px 20px;
+    font-weight: bold;
+    background-color: #003366;
+    color: #fff;
+    border: none;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+    /* Espacio superior para separar del contenido previo */
+    margin-bottom: 20px;
+    /* Espacio inferior para que no se solape con el siguiente elemento */
+}
+
+.accordion-body .btn:hover {
+    background-color: #002244;
+}
+
+/* Estilo para las etiquetas de estado (badge) */
+.badge {
+    font-size: 0.9rem;
+    padding: 0.5em 0.75em;
+    border-radius: 12px;
+}
