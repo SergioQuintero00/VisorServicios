@@ -13,26 +13,26 @@ document.addEventListener("DOMContentLoaded", function () {
 
 //Hace la consulta a la base de datos sobre los datos del Servicio
 function getDatosServicio(idServicio) {
-  fetch(`http://192.168.1.145:3000/api/servicio/${idServicio}`)
-  .then(response => {
-    if (!response.ok) {
-      throw new Error("Servicio no encontrado");
-    }
-    return response.json();
-  })
-  .then(data => {
-    setDatosServicio(data);
-  })
-  .catch(error => console.error("Error al obtener servicio por ID:", error));
+  fetch(`http://localhost:3000/api/servicio/${idServicio}`)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error("Servicio no encontrado");
+      }
+      return response.json();
+    })
+    .then(data => {
+      setDatosServicio(data);
+    })
+    .catch(error => console.error("Error al obtener servicio por ID:", error));
 }
 
 function getHistorialServicio(idServicio) {
-  fetch(`http://192.168.1.145:3000/api/historial/${idServicio}`)
-  .then(response => response.json())
-  .then(data => {
-    setDatosHistorial(data);
-  })
-  .catch(error => console.error("Error al obtener historial del servicio:", error));
+  fetch(`http://localhost:3000/api/historial/${idServicio}`)
+    .then(response => response.json())
+    .then(data => {
+      setDatosHistorial(data);
+    })
+    .catch(error => console.error("Error al obtener historial del servicio:", error));
 }
 
 //Este método inserta los datos en el html o inserta html en la página sobre los datos del servicio

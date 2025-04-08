@@ -1,6 +1,6 @@
 
 function validaInicio() {
-  
+
   const dni = document.getElementById("dni");
   const password = document.getElementById("password");
 
@@ -20,25 +20,25 @@ function validaInicio() {
     return null;
   }
 
-  if (esValido == true){
+  if (esValido == true) {
     login();
   }
 }
 
-function login(){
-    // Capturar los valores del formulario
-    var dni = document.getElementById('dni').value;
-    var password = document.getElementById('password').value;
-    
-    // Crear la petición AJAX
-    fetch(`http://192.168.1.145:3000/api/login`, { //CONSULTA
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        dni: dni,
-        password: password
-      })
+function login() {
+  // Capturar los valores del formulario
+  var dni = document.getElementById('dni').value;
+  var password = document.getElementById('password').value;
+
+  // Crear la petición AJAX
+  fetch(`http://localhost:3000/api/login`, { //CONSULTA
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      dni: dni,
+      password: password
     })
+  })
     .then(response => response.json())
     .then(data => { //DATOS
       if (data.success) {
@@ -47,7 +47,7 @@ function login(){
 
         //redirije a la página principal
         window.location.href = `menu.html`;
-      }else {
+      } else {
         alert(data.error);
       }
     })
