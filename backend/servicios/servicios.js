@@ -32,11 +32,11 @@ function verDatosServicio(idServicio) {
 
 function getServiciosCliente(id) {
   fetch(`http://192.168.1.145:3000/api/servicios/usuario/${id}`)
-  .then(response => response.json())
-  .then(data => {
-    setServicios(data);
-  })
-  .catch(error => console.error("Error al obtener servicios del usuario:", error));
+    .then(response => response.json())
+    .then(data => {
+      setServicios(data);
+    })
+    .catch(error => console.error("Error al obtener servicios del usuario:", error));
 }
 
 function setServicios(servicios) {
@@ -89,7 +89,7 @@ function setServicios(servicios) {
                 </h2>
                 <div id="collapse${idServicio}" class="accordion-collapse collapse" aria-labelledby="heading${idServicio}" data-bs-parent="#accordionServicios">
                   <div class="accordion-body">
-                    ${detalle}
+                    ${detalles}
                     <a class="btn btn-dark float-end" onclick="verDatosServicio(${idServicio})">Ver detalles</a>
                     <br><br>
                   </div>
